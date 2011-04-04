@@ -1,0 +1,3 @@
+an httpd for use with xinetd.
+
+supports only cgi.
