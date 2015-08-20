@@ -1,3 +1,20 @@
 an httpd for use with xinetd.
 
 supports only cgi.
+ 
+example xinetd config in /etc/xinetd.d/http:
+
+# This is the tcp version.
+service http
+{
+	disable         = no
+	wait            = no
+	flags           = REUSE
+	socket_type     = stream
+	protocol        = tcp
+	user            = eli
+	port		= 80
+	server		= /home/eli/xcgid/xcgid
+	server_args	= /home/eli/werc/bin/werc.rc
+}
+
