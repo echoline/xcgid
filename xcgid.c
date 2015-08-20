@@ -5,6 +5,7 @@
 #include <string.h>
 #include <unistd.h> // execl()
 #include <stdlib.h> // exit()
+#include <poll.h>
 #define MAX_HEADER 8191
 #define ERRSTR "HTTP/1.1 500 Internal Server Error\r\n" \
 		"Content-Type: text/plain\r\n\r\n" 
@@ -99,8 +100,15 @@ int main(int argc, char **argv) {
 	int length = 0;
 	char *postdata = NULL;
 	char **args = argv;
+	struct pollfd pfd;
 
 	setenv("REMOTE_ADDR", getenv("REMOTE_HOST"), true);
+
+	pfd.fd = 0;
+	pfd.events = POLLIN;
+	r = poll(&pfd, 1, 3000);
+	if (r < 1)
+		exit(-3);
 
 	// initial request
 	do {
