@@ -123,7 +123,7 @@ int main(int argc, char **argv) {
 	pfd.events = POLLIN;
 	r = poll(&pfd, 1, 3000);
 	if (r < 1) {
-		printf(ERRSTR "timeout on initial request.\n");
+		printf(ERRSTR "timeout on initial request. (try refreshing)\n");
 		exit(-1);
 	}
 
