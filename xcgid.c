@@ -122,8 +122,10 @@ int main(int argc, char **argv) {
 	pfd.fd = 0;
 	pfd.events = POLLIN;
 	r = poll(&pfd, 1, 3000);
-	if (r < 1)
-		exit(-3);
+	if (r < 1) {
+		printf(ERRSTR "timeout on initial request.\n");
+		exit(-1);
+	}
 
 	// initial request
 	do {
